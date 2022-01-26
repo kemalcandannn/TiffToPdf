@@ -47,13 +47,18 @@ else:
     if (orjinalImageHeight / orjinalImageWidth) > a4KagidiOrani:
         kacSayfayaBolunecek = ceil(orjinalImageHeight / (orjinalImageWidth * a4KagidiOrani))
 
+    if kacSayfayaBolunecek > 0:
+        print(" ==================================== ")
+        
     for i in range(kacSayfayaBolunecek):
         left = 0
         top = floor(i * (orjinalImageHeight / kacSayfayaBolunecek))
         right = orjinalImageWidth
         bottom = floor((i + 1) * (orjinalImageHeight / kacSayfayaBolunecek))
-        print(" ============= " + str(i+1) + ". SAYFA ============= ")
+        print(" ============== " + str(i+1) + ". PAGE ============= ")
         print("THE DIMENSIONS OF IMAGE HAVE BEEN TAKEN")
+        print("LEFT TO RIGHT (" + str(left) + ", " + str(right) + ")")
+        print("TOP TO BOTTOM (" + str(left) + ", " + str(right) + ")")
         croppedPilImage = orjinalImage.crop((left, top, right, bottom))
         #croppedPilImage = croppedPilImage.convert('RGB')
         print("THE IMAGE HAS BEEN CROPPED")
