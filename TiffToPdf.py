@@ -30,7 +30,7 @@ else:
     Image.MAX_IMAGE_PIXELS = None
 
     path, target = sys.argv[1], sys.argv[2]
-    a4KagidiOrani = 297 / 210
+    a4PaperRatio = 297 / 210
     orjinalImage = Image.open(path)
 
     orjinalImageWidth, orjinalImageHeight = orjinalImage.size
@@ -40,21 +40,21 @@ else:
         orjinalImage = rotatedImage
         orjinalImageWidth, orjinalImageHeight = orjinalImage.size
 
-    kacSayfayaBolunecek = 0
+    numberOfPages = 0
     imagelist = []
     firstCroppedImage = None
 
-    if (orjinalImageHeight / orjinalImageWidth) > a4KagidiOrani:
-        kacSayfayaBolunecek = ceil(orjinalImageHeight / (orjinalImageWidth * a4KagidiOrani))
+    if (orjinalImageHeight / orjinalImageWidth) > a4PaperRatio:
+        numberOfPages = ceil(orjinalImageHeight / (orjinalImageWidth * a4PaperRatio))
 
-    if kacSayfayaBolunecek > 0:
+    if numberOfPages > 0:
         print(" ======================================= ")
         
-    for i in range(kacSayfayaBolunecek):
+    for i in range(numberOfPages):
         left = 0
-        top = floor(i * (orjinalImageHeight / kacSayfayaBolunecek))
+        top = floor(i * (orjinalImageHeight / numberOfPages))
         right = orjinalImageWidth
-        bottom = floor((i + 1) * (orjinalImageHeight / kacSayfayaBolunecek))
+        bottom = floor((i + 1) * (orjinalImageHeight / numberOfPages))
         print(" =============== " + str(i+1) + ". PAGE =============== ")
         print("THE DIMENSIONS OF IMAGE HAVE BEEN TAKEN")
         print("LEFT TO RIGHT (" + str(left) + ", " + str(right) + ")")
@@ -74,7 +74,7 @@ else:
         print("THE IMAGE HAS BEEN ADDED TO LIST")
         print(" ======================================= ")
 
-    if kacSayfayaBolunecek > 0:
-        print("THE TIFF FILE WAS CONVERTED TO " + str(kacSayfayaBolunecek) + " PAGE PDF.")
+    if numberOfPages > 0:
+        print("THE TIFF FILE WAS CONVERTED TO " + str(numberOfPages) + " PAGE PDF.")
         firstCroppedImage.save(target, save_all=True, append_images=imagelist)
         print("PDF SUCCESSFULLY CREATED.")
