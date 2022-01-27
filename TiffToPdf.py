@@ -60,8 +60,12 @@ else:
         print("LEFT TO RIGHT (" + str(left) + ", " + str(right) + ")")
         print("TOP TO BOTTOM (" + str(top) + ", " + str(bottom) + ")")
         croppedPilImage = orjinalImage.crop((left, top, right, bottom))
-        #croppedPilImage = croppedPilImage.convert('RGB')
         print("THE IMAGE HAS BEEN CROPPED")
+        
+        #### THIS CODE BLOCK ALLOWS THE CREATED PDF TO BE LOWER SIZE ####
+        croppedPilImage = croppedPilImage.convert('RGB')
+        print("THE IMAGE HAS BEEN CONVERTED")
+        #################################################################
 
         if i == 0:
             firstCroppedImage = croppedPilImage
